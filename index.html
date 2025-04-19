@@ -121,6 +121,26 @@
                     </div>
                 </div>
             </section>
+            <section class="video-section text-center">
+                <div class="container-sm">
+                  <div class="video-section-wrapper">
+                    <!-- Background Illustrations -->
+                    <img class="video-illustration asset-light" src="dist/images/features-illustration-light.svg" alt="Feature illustration">
+                    <img class="video-illustration asset-light" src="dist/images/features-illustration-top-light.svg" alt="Feature illustration top">
+                    <img class="video-illustration asset-dark" src="dist/images/features-illustration-dark.svg" alt="Feature illustration">
+                    <img class="video-illustration asset-dark" src="dist/images/features-illustration-top-dark.svg" alt="Feature illustration top">
+              
+                    <!-- Video on Top -->
+                    <video class="tribute-video asset-light" controls>
+                      <source src="vidquotes.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+            
+                  </div>
+                </div>
+              </section>
+              <div class="scroll-down-btn" id="scrollDownBtn" title="Scroll to video section"></div>
+              
         </main>
 
         <footer class="site-footer has-top-divider">
@@ -132,8 +152,44 @@
             </div>
         </footer>
     </div>
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="ring"></div>
+            <p class="loading-text typing-animation">Your surprise is loading...</p>
+
+
+        </div>
+    </div>
+    
+    
 
     <script src="dist/js/main.min.js"></script>
+    <script>
+        const scrollDownBtn = document.getElementById('scrollDownBtn');
+        const videoSection = document.querySelector('.video-section');
+
+        function handleScroll() {
+            const videoSectionTop = videoSection.offsetTop;
+            const videoSectionHeight = videoSection.offsetHeight;
+            const scrollPosition = window.scrollY + window.innerHeight;
+            
+            if (scrollPosition > videoSectionTop + videoSectionHeight - 100) {
+                scrollDownBtn.classList.add('hidden');
+            } else {
+                scrollDownBtn.classList.remove('hidden');
+            }
+        }
+
+        handleScroll();
+
+        window.addEventListener('scroll', handleScroll);
+
+        scrollDownBtn.addEventListener('click', function() {
+            videoSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchBox = document.getElementById('searchBox');
@@ -243,10 +299,25 @@
                     results.forEach(person => {
                         const li = document.createElement('li');
                         li.textContent = person.name;
-                        li.addEventListener('click', function() {
-                            // Redirect to the corresponding page
+                        li.addEventListener('click', function () {
+                        const screen = document.getElementById('loading-screen');
+                        const text = document.querySelector('.typing-animation');
+
+                        screen.classList.add('active');
+
+                        text.classList.remove('typing-start');
+                        void text.offsetWidth; 
+                        text.classList.add('typing-start');
+
+                        setTimeout(() => {
                             window.location.href = person.page;
-                        });
+                        }, 2000); 
+                    });
+
+
+
+
+
                         nameList.appendChild(li);
                     });
                     nameList.classList.add('visible');
