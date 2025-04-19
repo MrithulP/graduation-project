@@ -330,6 +330,7 @@
                 }
             }
         });
+		
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -351,6 +352,11 @@
           setupSlideshow('.slideshow-container.asset-light');
           setupSlideshow('.slideshow-container.asset-dark');
         });
+		window.addEventListener('pageshow', function () {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.remove('active');
+        });
+
         
       </script>
       
