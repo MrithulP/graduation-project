@@ -1713,12 +1713,225 @@ body.overlay-active {
         margin-top: -5vh;
     }
 }
+#loading-screen {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#loading-screen.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+}
 
 
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader .ring {
+    width: 80px;
+    height: 80px;
+    border: 6px solid transparent;
+    border-top: 6px solid #00f2fe;
+    border-radius: 50%;
+    animation: spin 1.1s linear infinite;
+    margin-bottom: 20px;
+    position: relative;
+}
 
 
+.loader .ring::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.loading-text {
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: glow 2s ease-in-out infinite alternate;
+}
 
 
+#loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
+    }
+    to {
+        text-shadow: 0 0 20px #00f2fe, 0 0 40px #00f2fe;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.typing-animation {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #00f2fe;
+    width: 0;
+    animation: none;
+    padding-right: 5px;
+}
+
+.typing-start {
+    animation: typing 2s steps(27, end) forwards, blink-caret 0.75s step-end 5;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 27ch }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #00f2fe; }
+}
+
+.video-section {
+    padding: 80px 0;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-bottom: 5vh;
+  }
+  
+  .video-section .section-title {
+    font-size: 38px;
+    line-height: 1.3;
+    margin-bottom: 48px;
+    color: #182538;
+  }
+  
+  .video-section-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .video-illustration {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 140%;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+    scale: 1.2;
+  }
+  
+  .tribute-video {
+    width: 90%;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 48px 16px 48px rgba(24, 37, 56, 0.12);
+    z-index: 2;
+    position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    .video-section {
+      padding: 60px 0;
+    }
+  
+    .video-section .section-title {
+      font-size: 28px;
+      margin-bottom: 32px;
+    }
+  
+    .tribute-video {
+      width: 100%;
+      box-shadow: none;
+    }
+  
+    .video-illustration {
+      width: 100%;
+    }
+  }
+  
+.scroll-down-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #02053d;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+.scroll-down-btn:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.scroll-down-btn::after {
+    content: "↓";
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.scroll-down-btn.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
 
 
 
